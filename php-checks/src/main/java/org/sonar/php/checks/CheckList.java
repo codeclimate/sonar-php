@@ -144,6 +144,7 @@ public class CheckList {
       OverridingMethodSimplyCallParentCheck.class,
       TooManyFunctionParametersCheck.class,
       UselessExpressionStatementCheck.class,
+      UselessIncrementCheck.class,
       SelfAssignmentCheck.class,
       UselessObjectCreationCheck.class,
       DuplicateConditionCheck.class,
