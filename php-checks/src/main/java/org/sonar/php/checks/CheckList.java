@@ -158,6 +158,7 @@ public class CheckList {
       SessionCookiePersistenceCheck.class,
       ParsingErrorCheck.class,
       UnusedExceptionCheck.class,
+      UseOfEmptyReturnValueCheck.class,
       IdenticalOperandsInBinaryExpressionCheck.class);
   }
 
