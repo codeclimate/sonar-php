@@ -20,7 +20,6 @@
 package org.sonar.php.parser;
 
 import com.sonar.sslr.api.typed.GrammarBuilder;
-import java.util.List;
 import org.sonar.php.api.PHPKeyword;
 import org.sonar.php.api.PHPPunctuator;
 import org.sonar.php.tree.impl.SeparatedListImpl;
@@ -57,6 +56,7 @@ import org.sonar.plugins.php.api.tree.expression.ExpandableStringLiteralTree;
 import org.sonar.plugins.php.api.tree.expression.ExpressionTree;
 import org.sonar.plugins.php.api.tree.expression.FunctionCallTree;
 import org.sonar.plugins.php.api.tree.expression.FunctionExpressionTree;
+import org.sonar.plugins.php.api.tree.expression.HeredocBodyTree;
 import org.sonar.plugins.php.api.tree.expression.HeredocStringLiteralTree;
 import org.sonar.plugins.php.api.tree.expression.LexicalVariablesTree;
 import org.sonar.plugins.php.api.tree.expression.ListExpressionTree;
@@ -1210,11 +1210,11 @@ public class PHPGrammar {
       f.heredocStringLiteral(b.token(PHPLexicalGrammar.HEREDOC)));
   }
 
-  public List<ExpressionTree> HEREDOC_BODY() {
-    return b.<List<ExpressionTree>>nonterminal(PHPLexicalGrammar.HEREDOC_BODY).is(
-      b.oneOrMore(b.firstOf(
+  public HeredocBodyTree HEREDOC_BODY() {
+    return b.<HeredocBodyTree>nonterminal(PHPLexicalGrammar.HEREDOC_BODY).is(
+      f.heredocBodyTree(b.oneOrMore(b.firstOf(
         HEREDOC_STRING_CHARACTERS(),
-        ENCAPSULATED_STRING_VARIABLE())));
+        ENCAPSULATED_STRING_VARIABLE()))));
   }
 
   public ExpressionTree ENCAPSULATED_STRING_VARIABLE() {

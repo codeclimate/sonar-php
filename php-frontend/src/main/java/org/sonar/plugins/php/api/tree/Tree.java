@@ -49,6 +49,7 @@ import org.sonar.plugins.php.api.tree.expression.ExpandableStringCharactersTree;
 import org.sonar.plugins.php.api.tree.expression.ExpandableStringLiteralTree;
 import org.sonar.plugins.php.api.tree.expression.FunctionCallTree;
 import org.sonar.plugins.php.api.tree.expression.FunctionExpressionTree;
+import org.sonar.plugins.php.api.tree.expression.HeredocBodyTree;
 import org.sonar.plugins.php.api.tree.expression.HeredocStringLiteralTree;
 import org.sonar.plugins.php.api.tree.expression.LexicalVariablesTree;
 import org.sonar.plugins.php.api.tree.expression.ListExpressionTree;
@@ -113,6 +114,8 @@ public interface Tree {
   void accept(VisitorCheck visitor);
 
   Kind getKind();
+
+  Tree getParent();
 
   enum Kind implements GrammarRuleKey {
 
@@ -665,6 +668,8 @@ public interface Tree {
      * {@code heredoc}
      */
     HEREDOC_LITERAL(HeredocStringLiteralTree.class),
+
+    HEREDOC_BODY(HeredocBodyTree.class),
 
     NOWDOC_LITERAL(LiteralTree.class),
 

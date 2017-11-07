@@ -157,6 +157,9 @@ public class ForEachStatementTreeImpl extends PHPTree implements ForEachStatemen
    */
   public static class ForEachStatementHeader implements Tree {
 
+    @Nullable
+    private Tree parent;
+
     private final InternalSyntaxToken foreachToken;
     private final InternalSyntaxToken openParenthesisToken;
     private final ExpressionTree expression;
@@ -179,6 +182,15 @@ public class ForEachStatementTreeImpl extends PHPTree implements ForEachStatemen
       this.doubleArrowToken = doubleArrowToken;
       this.value = value;
       this.closeParenthesisToken = closeParenthesisToken;
+    }
+
+    public void setParent(Tree parent) {
+      this.parent = parent;
+    }
+
+    @Nullable
+    public Tree getParent() {
+      return parent;
     }
 
     @Override

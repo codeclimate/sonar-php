@@ -17,35 +17,13 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.php.parser;
+package org.sonar.plugins.php.api.tree.expression;
 
-import com.sonar.sslr.api.typed.ActionParser;
+import java.util.List;
 import org.sonar.plugins.php.api.tree.Tree;
-import org.sonar.sslr.grammar.GrammarRuleKey;
 
-public class PHPParserBuilder {
+public interface HeredocBodyTree extends Tree {
 
-  private PHPParserBuilder(){
-  }
-
-  public static ActionParser<Tree> createParser() {
-    return createParser(PHPLexicalGrammar.COMPILATION_UNIT);
-  }
-
-  /**
-   * This method should be used by tests only.
-   * Provides ability to start parsing from some rule other than PHPLexicalGrammar.COMPILATION_UNIT.
-   * @param rootRule rule from which parsing starts
-   */
-  public static ActionParser<Tree> createParser(GrammarRuleKey rootRule) {
-    return createParser(rootRule, 0);
-  }
-
-  /**
-   * This method should be used if required to shift line of tokens
-   */
-  public static ActionParser<Tree> createParser(GrammarRuleKey rootRule, int lineOffset) {
-    return new PHPParser(rootRule, lineOffset);
-  }
+  List<ExpressionTree> expressions();
 
 }

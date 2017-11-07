@@ -164,6 +164,9 @@ public class ForStatementTreeImpl extends PHPTree implements ForStatementTree {
    */
   public static class ForStatementHeader implements Tree {
 
+    @Nullable
+    private Tree parent;
+
     private final InternalSyntaxToken forToken;
     private final InternalSyntaxToken openParenthesisToken;
     private final SeparatedListImpl<ExpressionTree> init;
@@ -187,6 +190,15 @@ public class ForStatementTreeImpl extends PHPTree implements ForStatementTree {
       this.secondSemicolonToken = secondSemicolonToken;
       this.update = update;
       this.closeParenthesisToken = closeParenthesisToken;
+    }
+
+    public void setParent(Tree parent) {
+      this.parent = parent;
+    }
+
+    @Nullable
+    public Tree getParent() {
+      return parent;
     }
 
     @Override

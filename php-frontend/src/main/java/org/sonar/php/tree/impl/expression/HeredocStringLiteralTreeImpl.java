@@ -36,6 +36,7 @@ import org.sonar.php.tree.impl.lexical.InternalSyntaxToken;
 import org.sonar.plugins.php.api.tree.Tree;
 import org.sonar.plugins.php.api.tree.expression.ExpandableStringCharactersTree;
 import org.sonar.plugins.php.api.tree.expression.ExpressionTree;
+import org.sonar.plugins.php.api.tree.expression.HeredocBodyTree;
 import org.sonar.plugins.php.api.tree.expression.HeredocStringLiteralTree;
 import org.sonar.plugins.php.api.tree.lexical.SyntaxToken;
 import org.sonar.plugins.php.api.visitors.VisitorCheck;
@@ -57,7 +58,8 @@ public class HeredocStringLiteralTreeImpl extends PHPTree implements HeredocStri
     int contentStartIndex = matcher.start(3);
     int contentEndIndex = contentStartIndex == -1 ? openingTagEndIndex : matcher.end(3);
     if (content != null && content.length() > 0) {
-      this.elements = (List<ExpressionTree>) PHPParserBuilder.createParser(PHPLexicalGrammar.HEREDOC_BODY, tmpHeredocToken.line()).parse(content);
+      HeredocBodyTree heredoc = (HeredocBodyTree) PHPParserBuilder.createParser(PHPLexicalGrammar.HEREDOC_BODY, tmpHeredocToken.line()).parse(content);
+      this.elements = heredoc.expressions();
     } else {
       this.elements = Collections.emptyList();
     }

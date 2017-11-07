@@ -19,7 +19,6 @@
  */
 package org.sonar.php.parser;
 
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -72,6 +71,7 @@ import org.sonar.php.tree.impl.expression.ExpandableStringCharactersTreeImpl;
 import org.sonar.php.tree.impl.expression.ExpandableStringLiteralTreeImpl;
 import org.sonar.php.tree.impl.expression.FunctionCallTreeImpl;
 import org.sonar.php.tree.impl.expression.FunctionExpressionTreeImpl;
+import org.sonar.php.tree.impl.expression.HeredocBodyTreeImpl;
 import org.sonar.php.tree.impl.expression.HeredocStringLiteralTreeImpl;
 import org.sonar.php.tree.impl.expression.LexicalVariablesTreeImpl;
 import org.sonar.php.tree.impl.expression.ListExpressionTreeImpl;
@@ -153,6 +153,7 @@ import org.sonar.plugins.php.api.tree.expression.ExpandableStringLiteralTree;
 import org.sonar.plugins.php.api.tree.expression.ExpressionTree;
 import org.sonar.plugins.php.api.tree.expression.FunctionCallTree;
 import org.sonar.plugins.php.api.tree.expression.FunctionExpressionTree;
+import org.sonar.plugins.php.api.tree.expression.HeredocBodyTree;
 import org.sonar.plugins.php.api.tree.expression.HeredocStringLiteralTree;
 import org.sonar.plugins.php.api.tree.expression.LexicalVariablesTree;
 import org.sonar.plugins.php.api.tree.expression.ListExpressionTree;
@@ -1622,6 +1623,10 @@ public class TreeFactory {
 
   public HeredocStringLiteralTree heredocStringLiteral(InternalSyntaxToken token) {
     return new HeredocStringLiteralTreeImpl(token);
+  }
+
+  public HeredocBodyTree heredocBodyTree(List<ExpressionTree> expressions) {
+    return new HeredocBodyTreeImpl(expressions);
   }
 
   public ArrayAssignmentPatternTree arrayAssignmentPattern(
